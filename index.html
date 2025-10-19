@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio pessoal de Marques Matos Maciel Filho — Desenvolvedor Web." />
+  <title>Marques | Portfólio</title>
+  <!-- CSS principal (sem frameworks) -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Header fixo com navegação por âncoras -->
+  <header class="header" id="topo">
+    <div class="container header__inner">
+      <a class="brand" href="#topo" aria-label="Ir para o topo">Marques Matos</a>
+
+      <!-- Menu mobile -->
+      <button
+        class="nav-toggle"
+        id="btnMenu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="nav"
+        aria-label="Abrir menu"
+      >☰</button>
+
+      <!-- Navegação principal -->
+      <nav id="nav" class="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="#sobre">Sobre mim</a></li>
+          <li><a href="#formacao">Formação</a></li>
+          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#contato">Contato</a></li>
+          <li>
+            <button id="btnTema" class="btn btn--ghost" type="button" aria-pressed="false">🌓 Tema</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Seção: Sobre mim ===== -->
+    <section id="sobre" class="section section--hero" aria-labelledby="ttl-sobre">
+      <div class="container grid-2">
+        <div>
+          <h1 id="ttl-sobre">Olá, sou <span class="highlight">Marques Matos</span> 👋</h1>
+          <p>
+            👋 Meu nome é Marques Matos, sou apaixonado por desenvolvimento de software e Inteligência Artificial.
+            Gosto de interagir com pessoas e trocar ideias sobre qualquer assunto.
+            <br><br>👨‍💻 Atualmente, estou focado em desenvolvimento web, programação e engenharia de prompt.
+            Já adquiri conhecimento em diversas ferramentas, como HTML, CSS, Bootstrap, Git, GitHub e React.
+            <br><br>🎓 Sou graduando em Engenharia de Software pelo Centro Universitário Internacional Uninter,
+            além de estar cursando Full Stack presencialmente na Digital College. Também faço parte do Curso em Vídeo
+            (Gustavo Guanabara) e do curso online na Code Start.
+          </p>
+          <ul class="tags">
+            <li>HTML5</li><li>CSS3</li><li>JavaScript</li>
+          </ul>
+          <a class="btn" href="#portfolio">Ver projetos</a>
+        </div>
+
+        <!-- Foto de perfil -->
+        <div class="hero__image">
+          <img src="img/teste-foto-redonda.png" alt="Foto de Marques Matos" class="foto-perfil" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Seção: Formação ===== -->
+    <section id="formacao" class="section" aria-labelledby="ttl-formacao">
+      <div class="container">
+        <h2 id="ttl-formacao">Formação</h2>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Engenharia de Software</h3>
+            <p class="muted">2024 – atual • UNINTER</p>
+            <p>Ênfase em desenvolvimento web, engenharia de requisitos e qualidade de software.</p>
+          </article>
+
+          <article class="card">
+            <h3>Cursos</h3>
+            <ul class="list">
+              <li>HTML5 e CSS3 (Curso em Vídeo)</li>
+              <li>JavaScript Avançado</li>
+              <li>Code Start — Fullstack</li>
+              <li>Digital College — Fullstack</li>
+              <li>Git e GitHub</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Seção: Portfólio ===== -->
+    <section id="portfolio" class="section" aria-labelledby="ttl-portfolio">
+      <div class="container">
+        <h2 id="ttl-portfolio">Portfólio</h2>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Projeto 1 — Receita de bolo simples</h3>
+            <a class="btn btn--ghost" href="https://marques-filho.github.io/simple-cake-recipe/" target="_blank" rel="noopener">Abrir</a>
+          </article>
+
+          <article class="card">
+            <h3>Projeto 2 — Página de pedidos</h3>
+            <a class="btn btn--ghost" href="https://marques-filho.github.io/challenge004-turmafs21/" target="_blank" rel="noopener">Abrir</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Seção: Contato ===== -->
+    <section id="contato" class="section" aria-labelledby="ttl-contato">
+      <div class="container">
+        <h2 id="ttl-contato">Contato</h2>
+
+        <!-- Formulário com validação JS e mensagens acessíveis -->
+        <form id="form-contato" class="form" novalidate>
+          <div class="form__group">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Seu nome completo" required />
+            <small class="msg-erro" id="erro-nome" aria-live="polite"></small>
+          </div>
+
+          <div class="form__group">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="usuario@dominio.com" required />
+            <small class="msg-erro" id="erro-email" aria-live="polite"></small>
+          </div>
+
+          <div class="form__group">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Como posso ajudar?" required></textarea>
+            <small class="msg-erro" id="erro-mensagem" aria-live="polite"></small>
+          </div>
+
+          <button class="btn" type="submit">Enviar</button>
+          <p class="muted">*O envio é simulado apenas para fins acadêmicos.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="ano"></span> Marques Matos Maciel Filho</span>
+      <a href="https://github.com/Marques-Filho" target="_blank" rel="noopener">GitHub</a>
+      <a href="#topo">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+
+  <!-- Modal nativo <dialog> para confirmação -->
+  <dialog id="modal" class="modal">
+    <div class="modal__content">
+      <h3 class="titulo-sucesso">Mensagem enviada com sucesso! ✅</h3>
+      <p>Obrigado pelo contato. Em breve responderei.</p>
+      <button class="btn" id="fecharModal" type="button">Fechar</button>
+    </div>
+  </dialog>
+
+  <!-- JS principal (sem bibliotecas) -->
+  <script src="js/script.js"></script>
+</body>
+</html>
+

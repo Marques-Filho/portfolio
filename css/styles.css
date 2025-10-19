@@ -1,0 +1,266 @@
+/* =========================
+   DESIGN TOKENS / TEMAS
+   ========================= */
+:root {
+  /* Paleta (modo escuro padrão) */
+  --bg: #0b0e14;
+  --bg-elev: #111520;
+  --text: #e6e8ee;
+  --muted: #9aa3b2;
+  --primary: #6aa6ff;      /* azul UI */
+  --primary-2: #83ffd6;    /* azul-esverdeado para realces */
+  --accent: #38d39f;       /* verde (sucesso) */
+  --danger: #ff6b6b;       /* vermelho (erro) */
+
+  --ring: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent);
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0,0,0,.28);
+  --shadow-soft: 0 6px 18px rgba(0,0,0,.22);
+}
+
+/* Tema claro (ativado via data-tema="claro" no <html>) */
+:root[data-tema="claro"] {
+  --bg: #f7f8fb;
+  --bg-elev: #ffffff;
+  --text: #11131a;
+  --muted: #6c7383;
+  --primary: #2f6fed;
+  --primary-2: #19c99a;
+  --accent: #19c99a;
+  --shadow: 0 12px 30px rgba(31,51,84,.15);
+  --shadow-soft: 0 8px 20px rgba(31,51,84,.10);
+}
+
+/* =========================
+   BASE
+   ========================= */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    /* brilhos adaptados ao tema */
+    radial-gradient(1200px 600px at 10% -20%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, color-mix(in srgb, var(--primary-2) 12%, transparent), transparent 60%),
+    var(--bg);
+  font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial;
+}
+
+/* Transição suave entre temas/estados */
+* {
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+}
+
+/* Containers e tipografia */
+.container { width: min(1100px, 92%); margin: 0 auto; }
+.section { padding: clamp(3rem, 6vw, 5rem) 0; }
+.section--hero { padding-top: 7rem; }
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .6rem; }
+.section h2 { font-size: clamp(1.6rem, 2.2vw, 2rem); }
+.highlight {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-2) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.muted { color: var(--muted); }
+
+/* =========================
+   HEADER / NAVEGAÇÃO
+   ========================= */
+.header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+}
+
+/* Em HTML, o header usa: class="container header__inner" → já herda a largura do .container */
+.header__inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .8rem 0;
+}
+
+.brand {
+  color: var(--text); text-decoration: none;
+  font-weight: 800; letter-spacing: .2px;
+  padding: .4rem .6rem; border-radius: 10px;
+}
+.brand:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
+
+.nav { display: block; }
+.nav__list {
+  list-style: none; display: flex; align-items: center;
+  gap: 1rem; margin: 0; padding: 0;
+}
+.nav a, .btn.btn--ghost {
+  color: var(--text); text-decoration: none;
+  padding: .55rem .8rem; border-radius: 10px;
+}
+.nav a:hover, .btn.btn--ghost:hover {
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+.nav a.is-active { outline: var(--ring); }
+
+/* Mobile menu */
+.nav-toggle {
+  display: none; background: none;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+  color: var(--text); padding: .45rem .6rem; border-radius: 10px;
+}
+@media (max-width: 800px) {
+  .nav-toggle { display: inline-flex; }
+  .nav {
+    display: none; position: absolute; right: 4%; top: 58px;
+    background: var(--bg-elev);
+    border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .nav.open { display: block; }
+  .nav__list { flex-direction: column; padding: .4rem; }
+}
+
+/* =========================
+   HERO / FOTO DE PERFIL
+   ========================= */
+.grid-2 {
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  gap: 2rem; align-items: center;
+}
+@media (max-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+.hero__image { display: flex; justify-content: center; align-items: flex-start; }
+
+.foto-perfil {
+  width: 100%; max-width: 240px;
+  aspect-ratio: 1 / 1; object-fit: cover; /* garante círculo perfeito */
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+  box-shadow: var(--shadow);
+  display: block;
+  margin: -150px auto 0; /* sobe a foto e centraliza */
+}
+@media (max-width: 900px) {
+  .foto-perfil { margin-top: 2rem; margin-bottom: 0; }
+}
+
+/* =========================
+   TAGS
+   ========================= */
+.tags {
+  display: flex; gap: .5rem; flex-wrap: wrap;
+  margin: 1rem 0; padding: 0; list-style: none;
+}
+.tags li {
+  border: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
+  padding: .35rem .6rem; border-radius: 999px; font-size: .9rem;
+}
+
+/* =========================
+   CARDS
+   ========================= */
+.cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+}
+@media (max-width: 900px) { .cards { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--bg-elev);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: var(--radius);
+  padding: 1rem; box-shadow: var(--shadow-soft);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+/* =========================
+   BOTÕES
+   ========================= */
+.btn {
+  background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary-2) 30%, var(--primary)));
+  border: none; padding: .75rem 1.1rem; border-radius: 12px;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: filter .18s ease, transform .05s ease;
+}
+.btn:hover { filter: brightness(1.06); }
+.btn:active { transform: scale(.98); }
+.btn--ghost {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+}
+
+/* =========================
+   FORMULÁRIO
+   ========================= */
+.form { display: grid; gap: 1rem; max-width: 680px; }
+.form__group { display: grid; gap: .35rem; }
+
+input, textarea, button, .btn { font: inherit; color: var(--text); }
+
+input, textarea {
+  background: var(--bg-elev);
+  border: 1px solid color-mix(in srgb, var(--text) 16%, transparent);
+  padding: .8rem .9rem;
+  border-radius: 12px; outline: none;
+}
+input::placeholder, textarea::placeholder {
+  color: color-mix(in srgb, var(--muted) 80%, transparent);
+}
+input:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: var(--ring);
+}
+
+/* Erros (vermelho) */
+.msg-erro {
+  color: var(--danger);
+  min-height: 1.1rem; font-size: .9rem; font-weight: 600;
+}
+.msg-erro:empty { display: none; }
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 25%, transparent);
+}
+
+/* Sucesso (verde) */
+.msg-sucesso {
+  color: var(--accent);
+  font-weight: 600; text-align: center; margin-top: 1rem;
+}
+
+/* =========================
+   MODAL <dialog>
+   ========================= */
+.modal::backdrop { background: rgba(0, 0, 0, 0.6); }
+
+.modal__content {
+  background: var(--bg-elev); color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  border-radius: var(--radius);
+  padding: 1.5rem; box-shadow: var(--shadow-soft);
+  max-width: 420px; margin: auto; text-align: center;
+}
+.modal__content h3 { margin-top: 0; color: var(--accent); }
+.modal__content button { margin-top: 1rem; }
+
+/* =========================
+   FOOTER
+   ========================= */
+.footer {
+  border-top: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  padding: 1.2rem 0;
+}
+.footer__inner {
+  display: flex; gap: 1rem; align-items: center; justify-content: space-between;
+}
+
+/* =========================
+   ACESSIBILIDADE / UX
+   ========================= */
+@media (prefers-reduced-motion: no-preference) { :root { scroll-behavior: smooth; } }
+:focus-visible { outline: var(--ring); }
